@@ -1,0 +1,12 @@
+.content{
+  width: 200px;
+  .str{
+    color: red;
+  }
+  .sss{
+    float: left;
+    width: 50px;
+    height: 20px;
+    background: yellow;
+  }
+}
