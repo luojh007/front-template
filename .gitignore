@@ -1,0 +1,11 @@
+*.DS_Store
+
+/node_modules/*
+npm-debug.log
+.idea
+.dll-link-plugin
+.scannerwork
+/dist/*
+pub
+tmp
+package-lock.json
