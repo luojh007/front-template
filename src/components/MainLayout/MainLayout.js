@@ -9,18 +9,8 @@ class MainLayout extends Component {
     this.state = {
       menuData: [
         {
-          name: '写',
-          children: [
-            {
-              name: '读书笔记',
-              url: '/note.html'
-
-            },
-            {
-              name: '读后感',
-              url: '/understanding.html'
-            }
-          ]
+          name: '做了什么',     
+          
         }
       ]
     }
@@ -41,7 +31,7 @@ class MainLayout extends Component {
             })}
           </SubMenu>
         } else {
-          return <Menu.Item key={index}>
+          return <Menu.Item onClick={() => this.props.history.push(item.url)} key={index}>
             {item.name}
           </Menu.Item>
         }
