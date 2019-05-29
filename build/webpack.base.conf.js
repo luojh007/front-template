@@ -4,7 +4,7 @@ function resolve(dir) {
 }
 module.exports = {
   entry: {
-    app: ['webpack-hot-middleware/client?noInfo=true&reload=true', './src/index.js'],
+    app: ['webpack-hot-middleware/client', './src/index.js'],
     vendor: ['react', 'redux', 'react-redux', 'antd'], // 'lodash' 'moment', 'rc-calendar'  
   },
   output: {
@@ -70,5 +70,5 @@ module.exports = {
         use: ["style-loader", "css-loader", "less-loader"],
       }
     ]
-  }
+  },
 }

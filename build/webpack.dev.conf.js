@@ -4,20 +4,22 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const baseWebpack = require('./webpack.base.conf')
 const merge = require('webpack-merge')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
-module.exports = merge(baseWebpack,{
+module.exports = merge(baseWebpack, {
   mode: 'development',
-  devtool: '#source-map',
+  devtool: '#cheap-module-eval-source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    // new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.resolve(__dirname, '../src/index.html'),
       inject: true
     }),
-    // new FriendlyErrorsWebpackPlugin({
-    //   clearConsole: true,
-    // }),   
+    new FriendlyErrorsWebpackPlugin({
+      onErrors: () => {
+      },
+      clearConsole: true,
+    }),
   ],
 }
 )

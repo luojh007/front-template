@@ -7,8 +7,8 @@ const express = require('express');
 const app = express();
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
-  quiet: true,
   publicPath: webpackConfig.output.publicPath,
+  quiet: true,
 })
 
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {
@@ -17,7 +17,7 @@ var hotMiddleware = require('webpack-hot-middleware')(compiler, {
 
 app.use(history({
   rewrites: [
-    { from: /\w+\.html/, to: '/'},
+    { from: /\w+\.html/, to: '/' },
   ]
 }));
 app.use(devMiddleware)
