@@ -21,13 +21,27 @@ function RouterConfig() {
     {
       component: Root,
       routes: [{
-        path: '/videoDemo',
+        path: '/videoDemo.html',
         exact: true,
         component: (props) => {
-          return createChildRouteComponent(require('./routes/ThingsDid/Index'), props);
+          return createChildRouteComponent(require('./routes/VideoDemo'), props);
 
         }
-      }]
+      }, {
+        path: '/timeManage.html',
+        exact: true,
+        component: (props) => {
+          return createChildRouteComponent(require('./routes/TimeManage'), props);
+
+        }
+      }, {
+        path: '/thingsDid.html',
+        exact: true,
+        component: (props) => {
+          return createChildRouteComponent(require('./routes/ThingsDid'), props);
+
+        }
+      },]
     }
   ]
   return <div>{renderRoutes(routes)}</div>

@@ -1,4 +1,6 @@
 const path = require('path')
+var config = require('../config')
+
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -8,12 +10,13 @@ module.exports = {
     vendor: ['react', 'redux', 'react-redux', 'antd'], // 'lodash' 'moment', 'rc-calendar'  
   },
   output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, '../dist'),
-    publicPath: '/',
-    chunkFilename: '[id][hash].js'
+    filename: '[name].js',
+    path: config.build.assetsRoot,
+    publicPath: process.env.NODE_ENV === 'production'
+      ? config.build.assetsPublicPath
+      : config.dev.assetsPublicPath
   },
-  stats: 'errors-only',
+  // stats: 'errors-only',
   module: {
     rules: [
       {

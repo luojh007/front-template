@@ -16,15 +16,15 @@ module.exports = {
     library
   },
   plugins: [
-    new webpack.DllPlugin({
-      path: path.join(__dirname, '../dist/[name]-manifest.json'),
-      name: library
-    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
       }
-    })
+    }),
+    new webpack.DllPlugin({
+      path: path.join(__dirname, '../dist/[name]-manifest.json'),
+      name: library
+    }),
   ],
   performance: {
     hints: false,  //关闭文件过大警告提醒

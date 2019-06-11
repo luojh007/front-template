@@ -9,8 +9,15 @@ class MainLayout extends Component {
     this.state = {
       menuData: [
         {
-          name: '做了什么',     
-          
+          name: '视频例子',
+          url: '/videoDemo.html',
+        },
+        {
+          name: '做了什么事儿',
+          url: '/thingsDid.html',
+        }, {
+          name: '时间管理',
+          url: '/timeManage.html',
         }
       ]
     }

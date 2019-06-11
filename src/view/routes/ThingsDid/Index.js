@@ -6,17 +6,11 @@ class Index extends Component {
 
     }
   }
-  /**
-   * 
-   */
-  componentDidMount(){
+  componentDidMount() {
     console.log(111);
   }
   render() {
-    <div>a
-
-      
-      aa</div>
+    <div>a</div>
   }
 }
 export default Index
