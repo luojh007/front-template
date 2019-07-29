@@ -6,6 +6,10 @@ const merge = require('webpack-merge')
 var config = require('../config')
 var utils = require('./utils')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = merge(baseWebpack, {
   mode: 'production',
@@ -13,7 +17,7 @@ module.exports = merge(baseWebpack, {
   output: {
     path: config.build.assetsRoot,
     filename: 'js/[name].js',
-    chunkFilename: 'js/[name]/[chunkhash].js' // [name] bundle-loader 的name配置值
+    chunkFilename: 'js/[id]/[chunkhash].js' // [name] bundle-loader 的name配置值
   },
   plugins: [
     new webpack.DllReferencePlugin({
@@ -42,6 +46,28 @@ module.exports = merge(baseWebpack, {
     }, {
       filepath: path.resolve(config.build.assetsRoot, './vendorsReact.dll.js'),
     }]),
+    new MiniCssExtractPlugin({
+      filename: "./css/[name].css",
+      chunkFilename: "./css/[id].css"
+    }),
   ],
+  //压缩js,css
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minSize: 30000,
+      maxSize: 0,
+
+    },
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: false, // set to true if you want JS source maps,       
+        // extractComments: 'all' //导出备注
+      }),
+      new OptimizeCssAssetsPlugin({})
+    ]
+  },
 }
 )

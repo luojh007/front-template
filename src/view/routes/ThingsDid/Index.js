@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
-class Index extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+import styles from './style.less'
 
-    }
-  }
-  componentDidMount() {
-    console.log(111);
-  }
+export default class Index extends Component {
   render() {
-    <div>a</div>
+    return (
+      <div className={styles.main}>
+        asdasdas
+        <p>asas</p>
+      </div>
+    )
   }
 }
-export default Index

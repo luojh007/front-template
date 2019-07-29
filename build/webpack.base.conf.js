@@ -1,9 +1,11 @@
 const path = require('path')
 var config = require('../config')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
+const proModal = process.env.NODE_ENV === 'production'
 module.exports = {
   entry: {
     app: ['webpack-hot-middleware/client', './src/index.js'],
@@ -12,9 +14,10 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: config.build.assetsRoot,
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+    // publicPath: proModal
+    //   ? config.build.assetsPublicPath
+    //   : config.dev.assetsPublicPath
+    publicPath: '/'
   },
   // stats: 'errors-only',
   module: {
@@ -49,28 +52,44 @@ module.exports = {
       {
         test: /(\.css|\.less)$/,
         include: [path.resolve(__dirname, '../src')],
-        use: [{
-          loader: 'style-loader'
-        },
-        {
-          loader: "css-loader",
-          options: {
-            importLoaders: 1,
-            modules: true,     //antd按需引用时不得打开
-            url: true,
-            minimize: process.env.NODE_ENV === 'production',
-            // sourceMap: config.build.productionSourceMap,
-            localIdentName: '[name]__[local]___[hash:base64:5]',
-          }
-        },
-        {
-          loader: 'less-loader'
-        },],
+        use: [
+
+          { loader: proModal ? MiniCssExtractPlugin.loader : "style-loader" },
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+              modules: true,     //antd按需引用时不得打开
+              url: true,
+              minimize: proModal,
+              // sourceMap: config.build.productionSourceMap,
+              localIdentName: '[name]__[local]___[hash:base64:5]',
+            }
+          },
+          {
+            loader: 'less-loader'
+          },],
       },
       {
         test: /(\.css|\.less)/,
         include: [path.resolve(__dirname, '../node_modules')],
-        use: ["style-loader", "css-loader", "less-loader"],
+        use: [
+          proModal ? MiniCssExtractPlugin.loader : "style-loader",
+          "css-loader",
+          'less-loader'
+        ],
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 10000,
+              name: "static/images/[name].[hash:7].[ext]"
+            }
+          }
+        ]
       }
     ]
   },
