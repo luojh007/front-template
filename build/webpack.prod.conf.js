@@ -6,7 +6,7 @@ const merge = require('webpack-merge')
 var config = require('../config')
 var utils = require('./utils')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const TerserJSPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 function resolve(dir) {
@@ -120,11 +120,12 @@ module.exports = merge(baseWebpack, {
 
     },
     minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: false, // set to true if you want JS source maps,       
-        // extractComments: 'all' //导出备注
+      new TerserJSPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true
+          }
+        }
       }),
       new OptimizeCssAssetsPlugin({})
     ]

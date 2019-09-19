@@ -1,14 +1,8 @@
 import React from 'react';
 import { renderRoutes } from 'react-router-config'
-import Bundle from '../core/bundle'
+import Loadable from 'react-loadable';
 import ScrollToTop from '../components/ScrollToTop'
 import MainLayout from '../components/MainLayout/MainLayout'
-//经过bundle-loader包装过的组件，实现按需加载
-const createChildRouteComponent = (container, props, ) => (
-  <Bundle load={container}>
-    {(View) => <View {...props} />}
-  </Bundle>
-)
 const Root = ({ route }) => (
   <ScrollToTop>
     <MainLayout>
@@ -16,43 +10,56 @@ const Root = ({ route }) => (
     </MainLayout>
   </ScrollToTop>
 )
+const Loading = ({ error, pastDelay }) => {
+  if (error) {
+    console.log(error);
+    return <div>Error!</div>;
+  } else if (pastDelay) {
+    return (
+      <Spin tip="Loading...">
+        <div style={{ height: 500 }} />
+      </Spin>
+    );
+  } else {
+    return null;
+  }
+};
 function RouterConfig() {
   const routes = [
     {
       component: Root,
       routes: [{
         path: '/videoDemo.html',
-        exact: true,
-        component: (props) => {
-          return createChildRouteComponent(require('./routes/VideoDemo'), props);
-
-        }
-      }, {
+        component: Loadable({
+          loader: () => import('./routes/VideoDemo'),
+          loading: Loading,
+        })
+      },
+      {
         path: '/timeManage.html',
-        exact: true,
-        component: (props) => {
-          return createChildRouteComponent(require('./routes/TimeManage'), props);
-
-        }
-      }, {
+        component: Loadable({
+          loader: () => import('./routes/TimeManage'),
+          loading: Loading,
+        })
+      },
+      {
         path: '/thingsDid.html',
-        exact: true,
-        component: (props) => {
-          return createChildRouteComponent(require('./routes/ThingsDid'), props);
-
-        }
+        component: Loadable({
+          loader: () => import('./routes/ThingsDid'),
+          loading: Loading,
+        })
       },
       {
         path: '/lTable.html',
-        exact: true,
-        component: (props) => {
-          return createChildRouteComponent(require('./routes/LTable/Index'), props);
-        }
+        // exact: true,
+        component: Loadable({
+          loader: () => import('./routes/LTable/Index'),
+          loading: Loading,
+        })
       },
       ]
     }
   ]
   return <div>{renderRoutes(routes)}</div>
 }
-
 export default RouterConfig;

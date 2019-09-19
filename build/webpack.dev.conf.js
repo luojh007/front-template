@@ -20,7 +20,7 @@ module.exports = merge(baseWebpack, {
           resolve("src/view/"),
         ],
         use: [
-          "style-loader",
+          { loader: "style-loader" },
           {
             loader: "css-loader",
             options: {
@@ -28,7 +28,7 @@ module.exports = merge(baseWebpack, {
               localIdentName: '[name]__[local]___[hash:base64:5]',
             }
           },
-          'less-loader',
+          { loader: "less-loader" },
           {
             loader: "postcss-loader",
             options: {
@@ -44,7 +44,7 @@ module.exports = merge(baseWebpack, {
           resolve("src/view/"),
         ],
         use: [
-          "style-loader",
+          { loader: "style-loader" },
           {
             loader: "css-loader",
             options: {
@@ -55,7 +55,14 @@ module.exports = merge(baseWebpack, {
               localIdentName: '[name]__[local]___[hash:base64:5]',
             }
           },
-          "less-loader",
+          {
+            loader: "less-loader",
+            options: {
+              javascriptEnabled: true,
+              modifyVars: {} // 使用了 antd 的全局样式配置时，.babelrc 仅支持 import 导入 "style": true
+              // ["import", { "libraryName": "antd", "style": true, "comment": "true for .less, css for .css"}]
+            }
+          }
         ],
       },
     ]

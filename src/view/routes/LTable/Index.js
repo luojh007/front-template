@@ -110,21 +110,18 @@ export default class Index extends Component {
     };
     return (
       <div>
-        <Button>aaa</Button>
-        {/* <Spin /> */}
-        {/* <Table rowSelection={rowSelection} columns={this.setColums()} dataSource={tableData} />, */}
-
-        {/* <Table
-          // rowSelection={rowSelection}
-          // columns={this.setColums()}
-          // dataSource={this.state.data}
-          // bordered={true}
-          // style={{ marginTop: 10 }}
-          // pagination={this.state.pagination}
-          // loading={this.state.loading}
-          // onChange={this.handleTableChange}
-          // rowKey={(record, index) => index}
-        /> */}
+        sss
+        <Table
+          rowSelection={rowSelection}
+          columns={this.setColums()}
+          dataSource={this.state.data}
+          bordered={true}
+          style={{ marginTop: 10 }}
+          pagination={this.state.pagination}
+          loading={this.state.loading}
+          onChange={this.handleTableChange}
+          rowKey={(record, index) => index}
+        />
       </div>
     )
   }

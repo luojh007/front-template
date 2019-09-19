@@ -1,11 +1,8 @@
 const path = require('path')
 var config = require('../config')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
-const proModal = process.env.NODE_ENV === 'production'
 module.exports = {
   entry: {
     app: ['webpack-hot-middleware/client', './src/index.js'],
@@ -22,31 +19,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.js[x]?$/,
+        include: [resolve("src")],
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['es2015', 'stage-2', 'react'],
+            presets: ['@babel/preset-env']
           }
         },
-        include: [path.resolve(__dirname, '../src')]
-      },
-      {
-        test: /([^/]+)\/?([^/]*)\.(js|jsx)?$/,
-        use: [{
-          loader: 'bundle-loader',
-          options: {
-            lazy: true,
-            name: '[name]'
-          }
-        }, {
-          loader: 'babel-loader',
-          options: {
-            presets: ['es2015', 'stage-2', 'react'],
-          }
-        }
-        ],
-        include: [path.resolve(__dirname, '../src/view/routes')],
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
