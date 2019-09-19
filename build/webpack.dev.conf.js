@@ -4,9 +4,62 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const baseWebpack = require('./webpack.base.conf')
 const merge = require('webpack-merge')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+function resolve(dir) {
+  return path.join(__dirname, "..", dir);
+}
+
 module.exports = merge(baseWebpack, {
   mode: 'development',
   devtool: '#cheap-module-eval-source-map',
+  module: {
+    rules: [
+      {
+        test: /(\.css|\.less)/,
+        include: [
+          resolve("src/components"),
+          resolve("src/view/"),
+        ],
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]',
+            }
+          },
+          'less-loader',
+          {
+            loader: "postcss-loader",
+            options: {
+              plugins: [require("autoprefixer")()]
+            }
+          },
+        ],
+      },
+      {
+        test: /(\.css|\.less)$/,
+        exclude: [
+          resolve("src/components"),
+          resolve("src/view/"),
+        ],
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+              modules: false,     //antd按需引用时不得打开
+              url: true,
+              // sourceMap: config.build.productionSourceMap,
+              localIdentName: '[name]__[local]___[hash:base64:5]',
+            }
+          },
+          "less-loader",
+        ],
+      },
+    ]
+  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),

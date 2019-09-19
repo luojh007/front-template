@@ -19,7 +19,6 @@ module.exports = {
     //   : config.dev.assetsPublicPath
     publicPath: '/'
   },
-  // stats: 'errors-only',
   module: {
     rules: [
       {
@@ -48,36 +47,6 @@ module.exports = {
         }
         ],
         include: [path.resolve(__dirname, '../src/view/routes')],
-      },
-      {
-        test: /(\.css|\.less)$/,
-        include: [path.resolve(__dirname, '../src')],
-        use: [
-
-          { loader: proModal ? MiniCssExtractPlugin.loader : "style-loader" },
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 1,
-              modules: true,     //antd按需引用时不得打开
-              url: true,
-              minimize: proModal,
-              // sourceMap: config.build.productionSourceMap,
-              localIdentName: '[name]__[local]___[hash:base64:5]',
-            }
-          },
-          {
-            loader: 'less-loader'
-          },],
-      },
-      {
-        test: /(\.css|\.less)/,
-        include: [path.resolve(__dirname, '../node_modules')],
-        use: [
-          proModal ? MiniCssExtractPlugin.loader : "style-loader",
-          "css-loader",
-          'less-loader'
-        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

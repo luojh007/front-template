@@ -6,6 +6,8 @@ export default class Index extends Component {
     return (
       <div className={styles.main}>
         asdasdas
+
+        
         <p>asas</p>
       </div>
     )

@@ -41,7 +41,15 @@ function RouterConfig() {
           return createChildRouteComponent(require('./routes/ThingsDid'), props);
 
         }
-      },]
+      },
+      {
+        path: '/lTable.html',
+        exact: true,
+        component: (props) => {
+          return createChildRouteComponent(require('./routes/LTable/Index'), props);
+        }
+      },
+      ]
     }
   ]
   return <div>{renderRoutes(routes)}</div>
