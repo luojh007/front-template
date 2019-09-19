@@ -8,6 +8,11 @@ function resolve(dir) {
   return path.join(__dirname, "..", dir);
 }
 
+Object.keys(baseWebpack.entry).forEach(function (name) {
+  baseWebpack.entry[name] = ["./build/dev-client"].concat(
+    baseWebpack.entry[name]
+  );
+});
 module.exports = merge(baseWebpack, {
   mode: 'development',
   devtool: '#cheap-module-eval-source-map',

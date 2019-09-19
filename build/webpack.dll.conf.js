@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const library = '[name]'
 const path = require('path')
 var config = require('../config')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserJSPlugin = require("terser-webpack-plugin");
 module.exports = {
   entry: {
     vendors: ['moment'],
@@ -33,13 +33,13 @@ module.exports = {
   //压缩js
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          warnings: false,
-        },
-        sourceMap: false,
+      new TerserJSPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true
+          }
+        }
       }),
-
     ]
   },
 }

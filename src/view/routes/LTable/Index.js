@@ -110,7 +110,8 @@ export default class Index extends Component {
     };
     return (
       <div>
-        sss
+        ss
+        sssaa
         <Table
           rowSelection={rowSelection}
           columns={this.setColums()}
