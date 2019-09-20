@@ -6,7 +6,6 @@ function resolve(dir) {
 module.exports = {
   entry: {
     app: resolve("src/index.js"),
-    vendor: ['react', 'redux', 'react-redux', 'antd'], // 'lodash' 'moment', 'rc-calendar'  
   },
   output: {
     filename: '[name].js',
@@ -20,25 +19,28 @@ module.exports = {
     rules: [
       {
         test: /\.js[x]?$/,
-        include: [resolve("src")],
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env']
-          }
+        loader: "babel-loader",
+        query: {
+          presets: ["@babel/preset-react"]
         },
+        include: [resolve("src")]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        use: [
-          {
-            loader: "url-loader",
-            options: {
-              limit: 10000,
-              name: "static/images/[name].[hash:7].[ext]"
-            }
-          }
-        ]
+        loader: "url-loader",
+        query: {
+          // limit: 10000,
+          name: 'static/images/[name].[hash:7].[ext]'
+        },
+        include: [resolve("src"), resolve("node_modules/@317hu")]
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: "url-loader",
+        query: {
+          limit: 10000,
+          name: 'static/images/[name].[hash:7].[ext]'
+        }
       }
     ]
   },

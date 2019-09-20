@@ -24,7 +24,7 @@ const Loading = ({ error, pastDelay }) => {
     return null;
   }
 };
-function RouterConfig() {
+function RootRouter() {
   const routes = [
     {
       component: Root,
@@ -53,7 +53,7 @@ function RouterConfig() {
         path: '/lTable.html',
         // exact: true,
         component: Loadable({
-          loader: () => import('./routes/LTable/Index'),
+          loader: () => import('./routes/LTable/list'),
           loading: Loading,
         })
       },
@@ -62,4 +62,4 @@ function RouterConfig() {
   ]
   return <div>{renderRoutes(routes)}</div>
 }
-export default RouterConfig;
+export default RootRouter;

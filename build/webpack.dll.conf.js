@@ -16,11 +16,6 @@ module.exports = {
     library
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
     new webpack.DllPlugin({
       path: path.join(__dirname, '../dist/[name]-manifest.json'),
       name: library

@@ -9,7 +9,7 @@ const app = express();
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
   quiet: true,
-  stats: "none"
+  // stats: "none"
 })
 
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {

@@ -18,7 +18,23 @@ module.exports = merge(baseWebpack, {
   output: {
     path: config.build.assetsRoot,
     filename: 'js/[name].js',
-    chunkFilename: 'js/[id]/[chunkhash].js' // [name] bundle-loader 的name配置值
+    chunkFilename: 'js/[name]/[chunkhash].js' // [name] bundle-loader 的name配置值
+  },
+   //压缩js,css
+   optimization: {   
+    minimizer: [
+      new TerserJSPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true
+          }
+        }
+      }),
+      new OptimizeCssAssetsPlugin({})
+    ],
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   module: {
     rules: [
@@ -113,27 +129,8 @@ module.exports = merge(baseWebpack, {
     }]),
     new MiniCssExtractPlugin({
       filename: "./css/[name].css",
-      chunkFilename: "./css/[id].css"
+      chunkFilename: "./css/[name].css"
     }),
   ],
-  //压缩js,css
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      minSize: 30000,
-      maxSize: 0,
-
-    },
-    minimizer: [
-      new TerserJSPlugin({
-        terserOptions: {
-          compress: {
-            drop_console: true
-          }
-        }
-      }),
-      new OptimizeCssAssetsPlugin({})
-    ]
-  },
 }
 )
