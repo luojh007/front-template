@@ -61,7 +61,15 @@ function RootRouter() {
         path: '/importModal.html',
         // exact: true,
         component: Loadable({
-          loader: () => import('./routes/ImportModal'),
+          loader: () => import('./routes/ImportFile'),
+          loading: Loading,
+        })
+      },
+      {
+        path: '/multipleAdd.html',
+        // exact: true,
+        component: Loadable({
+          loader: () => import('./routes/MultipleAdd'),
           loading: Loading,
         })
       },

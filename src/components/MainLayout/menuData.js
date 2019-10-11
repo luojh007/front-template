@@ -17,5 +17,9 @@ export const menuData = [
   {
     name: '导入文件弹窗演示',
     url: '/importModal.html'
+  },
+  {
+    name: '动态多项新增',
+    url: '/multipleAdd.html'
   }
 ]
