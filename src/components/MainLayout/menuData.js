@@ -13,5 +13,9 @@ export const menuData = [
   {
     name: '表单相关演示',
     url: '/lTable.html'
+  },
+  {
+    name: '导入文件弹窗演示',
+    url: '/importModal.html'
   }
 ]
