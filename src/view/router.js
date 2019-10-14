@@ -73,6 +73,14 @@ function RootRouter() {
           loading: Loading,
         })
       },
+      {
+        path: '/uploadMultiple.html',
+        // exact: true,
+        component: Loadable({
+          loader: () => import('./routes/UploadMultiple'),
+          loading: Loading,
+        })
+      },
       ]
     }
   ]

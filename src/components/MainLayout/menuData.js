@@ -21,5 +21,9 @@ export const menuData = [
   {
     name: '动态多项新增',
     url: '/multipleAdd.html'
+  },
+  {
+    name: 'antd文件上传+七牛',
+    url: '/uploadMultiple.html'
   }
 ]
