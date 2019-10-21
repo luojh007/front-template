@@ -1,8 +1,8 @@
 import axios from 'axios';
 import objectAssign from 'object-assign';
 import { clearCacheAll } from './storage';
-const boz = require('../../../config').BOZ;
-const apiConfig = boz['api'][boz.env];
+const api = require('../../store/api')
+// const apiConfig = boz['api'][boz.env];
 /** @发起请求
  * 支持请求方式： GET | POST | PUT | DELETE
  *
@@ -73,7 +73,7 @@ export default function request(query) {
 
   objectAssign(optionConfig, options);
 
-  return axios((api ? boz['api'][`${boz.env}`][api] : '') + url, optionConfig)
+  return axios(url, optionConfig)
     // .then((response) => response.data)
     .then((response) => {
       let res = response.data;
@@ -100,7 +100,7 @@ export default function request(query) {
 
 export function checkIn() {
   clearCacheAll()
-  window.location.href = `${apiConfig['loginPage']}`
+  // window.location.href = `${apiConfig['loginPage']}`
 }
 
 export var run = request;
