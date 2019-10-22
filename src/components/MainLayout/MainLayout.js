@@ -10,7 +10,7 @@ class MainLayout extends Component {
     this.state = {
     }
   }
-  renderMenu = () => {    
+  renderMenu = () => {
     return <Menu
       mode="inline"
       className={styles.menu}
@@ -19,13 +19,13 @@ class MainLayout extends Component {
         if (item.children) {
           return <SubMenu key={index} title={<span><Icon type="mail" /><span>{item.name}</span></span>}>
             {item.children.map((item2, index2) => {
-              return <Menu.Item onClick={() => this.props.history.push(item2.url)} key={index2}>
+              return <Menu.Item onClick={() => this.props.history.push(item2.url)} key={item2.url}>
                 {item2.name}
               </Menu.Item>
             })}
           </SubMenu>
         } else {
-          return <Menu.Item onClick={() => this.props.history.push(item.url)} key={index}>
+          return <Menu.Item onClick={() => this.props.history.push(item.url)} key={item.url}>
             {item.name}
           </Menu.Item>
         }

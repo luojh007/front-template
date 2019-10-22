@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button } from 'antd'
-import MultipleAddModal from '../../../components/MultipleAddModal'
+import MultipleAddModal from '../../../../components/MultipleAdd/BaseModal'
 export default class Index extends Component {
   constructor(props) {
     super(props);

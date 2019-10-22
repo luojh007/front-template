@@ -1,29 +1,31 @@
 export const menuData = [
   {
-    name: '视频例子',
-    url: '/videoDemo.html',
-  },
-  {
-    name: '做了什么事儿',
-    url: '/thingsDid.html',
-  }, {
-    name: '时间管理',
-    url: '/timeManage.html',
-  },
-  {
     name: '表单相关演示',
-    url: '/lTable.html'
+    url: '/lTable.html',
+    key: '1',
   },
   {
     name: '导入文件弹窗演示',
-    url: '/importModal.html'
+    url: '/importModal.html',
+    key: '2',
   },
   {
     name: '动态多项新增',
-    url: '/multipleAdd.html'
+    icon: 'plus',
+    key: '3',
+    children: [{
+      name: '基本弹窗',
+      url: '/multipleAdd/base.html',
+      key: '3-1',
+    }, {
+      name: '复杂一',
+      url: '/multipleAdd/complexOne.html',
+      key: '3-2'
+    }]
   },
   {
     name: 'antd文件上传+七牛',
-    url: '/uploadMultiple.html'
+    url: '/uploadMultiple.html',
+    key: '4',
   }
 ]

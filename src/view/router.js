@@ -66,10 +66,18 @@ function RootRouter() {
         })
       },
       {
-        path: '/multipleAdd.html',
+        path: '/multipleAdd/base.html',
         // exact: true,
         component: Loadable({
-          loader: () => import('./routes/MultipleAdd'),
+          loader: () => import('./routes/MultipleAdd/base/index'),
+          loading: Loading,
+        })
+      },
+      {
+        path: '/multipleAdd/complexOne.html',
+        // exact: true,
+        component: Loadable({
+          loader: () => import('./routes/MultipleAdd/complexOne/index'),
           loading: Loading,
         })
       },
