@@ -89,6 +89,14 @@ function RootRouter() {
           loading: Loading,
         })
       },
+      {
+        path: '/chart/tabsBase.html',
+        // exact: true,
+        component: Loadable({
+          loader: () => import('./routes/Chart/tabsBase'),
+          loading: Loading,
+        })
+      },
       ]
     }
   ]

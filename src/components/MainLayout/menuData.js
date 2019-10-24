@@ -27,5 +27,16 @@ export const menuData = [
     name: 'antd文件上传+七牛',
     url: '/uploadMultiple.html',
     key: '4',
+    icon: 'upload'
+  },
+  {
+    name: '图表（BizCharts）',
+    icon: 'area-chart',
+    key: '5',
+    children: [{
+      name: 'tabs切换基础图表',
+      url: '/chart/tabsBase.html',
+      key: '5-1',
+    }]
   }
 ]

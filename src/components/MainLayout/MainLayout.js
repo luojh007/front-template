@@ -17,7 +17,7 @@ class MainLayout extends Component {
     >
       {menuData.map((item, index) => {
         if (item.children) {
-          return <SubMenu key={index} title={<span><Icon type="mail" /><span>{item.name}</span></span>}>
+          return <SubMenu key={index} title={<span><Icon type={item.icon} /><span>{item.name}</span></span>}>
             {item.children.map((item2, index2) => {
               return <Menu.Item onClick={() => this.props.history.push(item2.url)} key={item2.url}>
                 {item2.name}
