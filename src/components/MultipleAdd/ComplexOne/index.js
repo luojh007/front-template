@@ -10,7 +10,7 @@ const addUuid = (data = {}) => {
     return item;
   })
 }
-class ComplexOne extends Component {
+class CalMutileForm extends Component {
   constructor(props) {
     super(props);
     var data = { ...props.data };
@@ -18,16 +18,30 @@ class ComplexOne extends Component {
       addUuid(data);
     }
     this.state = {
-      data
+      data,
+      type: data.type,
     }
   }
+  // static getDerivedStateFromProps(props, state) {
+  //   console.log(111)
+  //   if (props.data != state.data) {
+  //     var data = { ...props.data };
+  //     if (data.type == 2) {
+  //       addUuid(data);
+  //     }
+  //     return {
+  //       ...state,
+  //       data
+  //     }
+  //   }
+  //   return null
+  // }
   saveClick = () => {
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log(values);
-        var type = values.type;
+        const type = values.type;
         let params = {
-          type: values.type,
+          type,
         }
         //简单
         if (type == 1) {
@@ -38,7 +52,7 @@ class ComplexOne extends Component {
         else {
           let obj = {};
           for (let i in values) {
-            if (i == 'type') { continue; }
+            if (i == 'type') continue;
             if (obj[i.split('-')[1]]) {
               obj[i.split('-')[1]][i.split('-')[0]] = values[i];
             } else {
@@ -56,20 +70,6 @@ class ComplexOne extends Component {
       }
     })
   }
-  // static getDerivedStateFromProps(props, state) {
-  //   console.log(111)
-  //   if (props.data != state.data) {
-  //     var data = { ...props.data };
-  //     if (data.type == 2) {
-  //       addUuid(data);
-  //     }
-  //     return {
-  //       ...state,
-  //       data
-  //     }
-  //   }
-  //   return null
-  // }
   addClick = (index) => {
     let { data } = this.state;
     uuid++;
@@ -83,13 +83,18 @@ class ComplexOne extends Component {
     data.stepList.splice(index, 1);
     this.setState({ data });
   }
+  validator = (rule, value, callback) => {
+    if (value == undefined || value == '') {
+      callback('');
+    }
+    callback()
+  }
   render() {
-    const { data = {}, maxLength } = this.props
+    const { data = {}, maxLength = 6 } = this.props
     const { getFieldDecorator, getFieldValue } = this.props.form;
     return (<Form>
       <Form.Item>
         {getFieldDecorator('type', {
-          rules: [{ require: true, message: '类型必选' }],
           initialValue: data.type && data.type.toString()
         })(
           <Radio.Group>
@@ -98,12 +103,13 @@ class ComplexOne extends Component {
           </Radio.Group>
         )}
       </Form.Item>
+
       {
         getFieldValue('type') == '1' ? <div className={styles.simpleItem}>
           每{getFieldValue(`addOrSub`) == 1 ? '增加' : '扣除'}一个<span className={styles.remarkSpan}>例次</span>，权重
           <Form.Item>
             {getFieldDecorator('addOrSub', {
-              rules: [{ require: true, message: '选择增加或者扣除' }],
+              rules: [{ required: true, message: ' ' }],
               initialValue: data.addOrSub && data.addOrSub.toString()
             })(
               <Select style={{ width: 75, margin: '0 10px' }} placeholder='请选'>
@@ -114,7 +120,15 @@ class ComplexOne extends Component {
           </Form.Item>
           <Form.Item>
             {getFieldDecorator('weight', {
-              initialValue: data.weight
+              initialValue: data.weight,
+              rules: [{
+                validator: (rule, value, callback) => {
+                  if (value == undefined || value == '') {
+                    callback('')
+                  }
+                  callback();
+                }
+              }]
             })(
               <InputNumber style={{ width: 75 }} min={0} step={0.1} precision={3} placeholder='权重' />
             )}
@@ -125,7 +139,10 @@ class ComplexOne extends Component {
               <span className={styles.remarkSpan}>例次</span>数 {(getFieldValue(`addOrSub-${item.uuid}`) || item.addOrSub) == '1' ? '>=' : '<='}
               <Form.Item >
                 {getFieldDecorator(`limitValue-${item.uuid}`, {
-                  initialValue: item.limitValue
+                  initialValue: item.limitValue,
+                  rules: [{
+                    validator: this.validator
+                  }]
                 })(
                   <InputNumber style={{ width: 60, margin: '0 10px' }} min={0} step={1} precision={0} />
                 )}
@@ -134,7 +151,7 @@ class ComplexOne extends Component {
               权重
               <Form.Item>
                 {getFieldDecorator(`addOrSub-${item.uuid}`, {
-                  rules: [{ require: true, message: '选择增加或者扣除' }],
+                  rules: [{ required: true, message: ' ' }],
                   initialValue: item.addOrSub && item.addOrSub.toString()
                 })(
                   <Select style={{ width: 75, margin: '0 10px' }} placeholder='请选'>
@@ -145,7 +162,10 @@ class ComplexOne extends Component {
               </Form.Item>
               <Form.Item>
                 {getFieldDecorator(`weight-${item.uuid}`, {
-                  initialValue: item.weight
+                  initialValue: item.weight,
+                  rules: [{
+                    validator: this.validator
+                  }]
                 })(
                   <InputNumber style={{ width: 75 }} min={0} step={0.1} precision={3} placeholder='权重' />
                 )}
@@ -153,7 +173,10 @@ class ComplexOne extends Component {
               此后每{getFieldValue(`addOrSub-${item.uuid}`) == 1 ? '增加' : '扣除'}
               <Form.Item >
                 {getFieldDecorator(`stepValue-${item.uuid}`, {
-                  initialValue: item.stepValue
+                  initialValue: item.stepValue,
+                  rules: [{
+                    validator: this.validator
+                  }]
                 })(
                   <InputNumber style={{ width: 60, margin: '0 10px' }} min={0} step={1} precision={0} />
                 )}
@@ -161,7 +184,7 @@ class ComplexOne extends Component {
               个<span className={styles.remarkSpan}>例次</span>，权重
               <Form.Item>
                 {getFieldDecorator(`addOrSub-${item.uuid}`, {
-                  rules: [{ require: true, message: '选择增加或者扣除' }],
+                  rules: [{ required: true, message: ' ' }],
                   initialValue: item.addOrSub && item.addOrSub.toString()
                 })(
                   <Select style={{ width: 75, margin: '0 10px' }} placeholder='请选'>
@@ -172,7 +195,10 @@ class ComplexOne extends Component {
               </Form.Item>
               <Form.Item>
                 {getFieldDecorator(`stepWeight-${item.uuid}`, {
-                  initialValue: item.stepWeight
+                  initialValue: item.stepWeight,
+                  rules: [{
+                    validator: this.validator
+                  }]
                 })(
                   <InputNumber style={{ width: 75 }} min={0} step={0.1} precision={3} placeholder='权重' />
                 )}
@@ -192,4 +218,4 @@ class ComplexOne extends Component {
     )
   }
 }
-export default Form.create()(ComplexOne)
+export default Form.create()(CalMutileForm)
