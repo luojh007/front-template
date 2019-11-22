@@ -54,7 +54,7 @@ export default class TabsBase extends Component {
       }
     }
     return (
-      <div>
+      <div>        
         <TabsChart {...tabsChartProps} />
       </div>
     )

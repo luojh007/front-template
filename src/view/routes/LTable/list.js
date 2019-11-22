@@ -94,7 +94,14 @@ export default class TargetList extends Component {
       },
       {
         title: "资格证",
-        dataIndex: "certificateTypeStr"
+        // dataIndex: "certificateTypeStr",
+        children: [{
+          title: '资格证111',
+          dataIndex: "certificateTypeStr111",
+        }, {
+          title: '资格证222',
+          dataIndex: "certificateTypeStr222",
+        }]
       },
       {
         title: "证书名称",
