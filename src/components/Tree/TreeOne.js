@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { TreeData } from './staticData'
 import { arrHas } from '../../core/_utils/common'
-import { Icon } from 'antd'
+import { Icon, message } from 'antd'
 import styles from './style.less'
 export default class TreeOne extends Component {
   constructor(props) {
@@ -10,7 +10,10 @@ export default class TreeOne extends Component {
       showTreeIdMap: new Map([]), ///控制数节点展开，缩起
     }
   }
-  subItemClick = (id) => {
+  subItemClick = (item) => {
+    message.success('点击了科室' + item.deptId)
+  }
+  expandClick = (id) => {
     let { showTreeIdMap } = this.state
     showTreeIdMap.get(id) ? showTreeIdMap.set(id, false) : showTreeIdMap.set(id, true);
     this.setState({ showTreeIdMap });
@@ -26,7 +29,12 @@ export default class TreeOne extends Component {
         cursor: !item.leaf ? 'pointer' : 'text'
       }
       return <div >
-        <div onClick={() => this.subItemClick(item.id)} className={styles.treeItem} style={itemStyle} key={index}>           {!item.leaf ? <Icon type="plus-square" style={{ marginRight: 5 }} /> : ''}{item.deptName || item.wardName}</div>
+        <div className={styles.treeItem} style={itemStyle} key={index}>
+          {!item.leaf ? showTreeIdMap.get(item.id) ?
+            <Icon onClick={() => this.expandClick(item.id)} type="minus-square" style={{ marginRight: 5 }} /> :
+            <Icon onClick={() => this.expandClick(item.id)} type="plus-square" style={{ marginRight: 5 }} /> : ''}
+          <span onClick={() => this.subItemClick(item)}>{item.deptName || item.wardName}</span>
+        </div>
         {!item.leaf ?
           <div className={showTreeIdMap.get(item.id) ? styles.subShowItem : styles.subHidItem}>{this.renderLeafDiv(item, l)}</div> : ''}
       </div>
