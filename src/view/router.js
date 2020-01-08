@@ -97,6 +97,14 @@ function RootRouter() {
           loading: Loading,
         })
       },
+      {
+        path: '/tree/one.html',
+        // exact: true,
+        component: Loadable({
+          loader: () => import('./routes/Tree/one'),
+          loading: Loading,
+        })
+      },
       ]
     }
   ]

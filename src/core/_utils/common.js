@@ -338,55 +338,11 @@ export function arrayTreeFilter(data, filterFn, options) {
     } while (children.length > 0);
     return result;
 }
-
-/**
- * If you know you have two arrays or two objects in hand, and you want to know if they are shallowly equal or not, this library is for you.
- */
-export function shallowEqualArrays(arrA, arrB) {
-    if (arrA === arrB) {
-        return true;
-    }
-
-    var len = arrA.length;
-
-    if (arrB.length !== len) {
-        return false;
-    }
-
-    for (var i = 0; i < len; i++) {
-        if (arrA[i] !== arrB[i]) {
-            return false;
+export function arrHas(arr,item){
+    for(let i in arr){
+        if(arr[i] == item){
+            return true;
         }
     }
-
-    return true;
-}
-
-/**
- * value list获取 label list
- */
-export function getLabelArraysByValue(arrA, arrB) {
-    let nameArrays = [];
-    for (const a of arrA) {
-        for (const b of arrB) {
-            if (a === b.value) {
-                nameArrays.push(b.label);
-            }
-        }
-    }
-    return nameArrays;
-}
-
-/**
- * value list获取 label list
- */
-export function getLabelByValue(value, arrB) {
-    let label;
-    for (const item of arrB) {
-        if (item.value === value) {
-            label = item.label;
-            break;
-        }
-    }
-    return label;
+    return false;
 }

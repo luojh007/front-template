@@ -38,5 +38,15 @@ export const menuData = [
       url: '/chart/tabsBase.html',
       key: '5-1',
     }]
+  },
+  {
+    name: '树结构',
+    icon: 'tree',
+    key: '6',
+    children: [{
+      name: '基本树',
+      url: '/tree/one.html',
+      key: '6-1',
+    }]
   }
 ]
