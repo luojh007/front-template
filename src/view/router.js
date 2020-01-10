@@ -3,6 +3,7 @@ import { renderRoutes } from 'react-router-config'
 import Loadable from 'react-loadable';
 import ScrollToTop from '../components/ScrollToTop'
 import MainLayout from '../components/MainLayout/MainLayout'
+import { Spin } from 'antd';
 const Root = ({ route }) => (
   <ScrollToTop>
     <MainLayout>
@@ -102,6 +103,14 @@ function RootRouter() {
         // exact: true,
         component: Loadable({
           loader: () => import('./routes/Tree/one'),
+          loading: Loading,
+        })
+      },
+      {
+        path: '/modal/one.html',
+        // exact: true,
+        component: Loadable({
+          loader: () => import('./routes/Modal/one'),
           loading: Loading,
         })
       },

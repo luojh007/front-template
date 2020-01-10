@@ -48,5 +48,15 @@ export const menuData = [
       url: '/tree/one.html',
       key: '6-1',
     }]
+  },
+  {
+    name: '弹窗',
+    icon: 'modal',
+    key: '7',
+    children: [{
+      name: '基本弹窗',
+      url: '/modal/one.html',
+      key: '7-1',
+    }]
   }
 ]
