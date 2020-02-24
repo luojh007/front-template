@@ -1,0 +1,56 @@
+#!/bin/bash
+# echo "---------------------------初始化-------------------------"
+
+# if [ -d "./deploy" ]; 
+# then rm -rf ./deploy
+# fi
+
+# echo "---------------------------构建前端资源-------------------------"
+
+# npm run build:dll
+# npm run build
+
+# echo "---------------------------生成Dockerfile文件，和nginx配置文件-------------------------"
+
+# mkdir deploy
+# cp -r ./dist/ ./deploy/dist 
+# cd deploy
+# echo "FROM nginx:latest" >> ./Dockerfile
+# echo "COPY ./dist /user/share/nginx/html/"  >> ./Dockerfile
+# echo "COPY ./default.conf /etc/nginx/conf.d/"  >> ./Dockerfile
+# echo "EXPOSE 80" >>  ./Dockerfile
+
+# if [ -d "./default.conf" ]; 
+# then rm -rf ./default.conf;
+# fi
+# cat>> ./default.conf <<EOF
+# server {
+# listen 80;
+# server_name localhost;
+# location / {
+#     root   /usr/share/nginx/html;
+#     index  index.html index.htm;
+#     try_files \$uri \$uri/ /index.html;
+#   }
+# }
+# EOF
+# echo "---------------------------构建镜像-------------------------"
+
+
+# PROJECT_NAME=$(git remote  -v | head -1 | awk '{print $2}' |  sed 's/.*\///g')
+
+# BRANCH_NAME=$(git symbolic-ref HEAD | cut -d "/" -f 3)
+
+# IMAGE_NAME=luojh007/${PROJECT_NAME}
+
+# echo '镜像名称：'${IMAGE_NAME} 
+
+cd ./deploy
+
+
+docker build -t luojh007/template-master .
+
+
+# read -p "请输入dockerHub用户名和密码，用空格隔开：" userName password
+# docker login -u ${userName} -p ${password}
+# docker push ${IMAGE_NAME}
