@@ -7,7 +7,7 @@
     "build": "NODE_ENV=production webpack --config ./build/webpack.prod.conf.js",
     "start": "node ./build/dev.server.js",
     "build:dll": "node build/dll.js",
-    "build:deploy": "./deploy.sh"
+    "build:deploy": "./build/deploy.sh"
   },
   "author": "",
   "license": "ISC",
@@ -55,7 +55,6 @@
     "chalk": "^2.4.2",
     "connect-history-api-fallback": "^1.5.0",
     "cross-env": "^6.0.3",
-    "docker": "^1.0.0",
     "eventsource-polyfill": "^0.9.6",
     "moment": "^2.24.0",
     "ora": "^3.4.0",
