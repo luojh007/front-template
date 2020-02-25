@@ -43,7 +43,7 @@ BRANCH_NAME=$(git symbolic-ref HEAD | cut -d "/" -f 3)
 
 IMAGE_NAME=luojh007/${BRANCH_NAME}
 
-docker build -t luojh007/template-master .
+docker build -t luojh007/${BRANCH_NAME} .
 
 echo "---------------------------推送镜像-------------------------"
 
@@ -51,3 +51,7 @@ read -p "请输入dockerHub用户名和密码，用空格隔开：" userName pas
 docker login -u ${userName} -p ${password}
 
 docker push ${IMAGE_NAME}
+
+cmd="cd ~ && sh deploy.sh ${BRANCH_NAME}"
+
+ssh root@47.100.108.25 "bash -c" \"${cmd}\"
