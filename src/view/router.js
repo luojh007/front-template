@@ -2,13 +2,10 @@ import React from 'react';
 import { renderRoutes } from 'react-router-config'
 import Loadable from 'react-loadable';
 import ScrollToTop from '../components/ScrollToTop'
-import MainLayout from '../components/MainLayout/MainLayout'
 import { Spin } from 'antd';
 const Root = ({ route }) => (
   <ScrollToTop>
-    <MainLayout>
       {renderRoutes(route.routes)}
-    </MainLayout>
   </ScrollToTop>
 )
 const Loading = ({ error, pastDelay }) => {
@@ -30,87 +27,9 @@ function RootRouter() {
     {
       component: Root,
       routes: [{
-        path: '/videoDemo.html',
+        path: '/index.html',
         component: Loadable({
-          loader: () => import('./routes/VideoDemo'),
-          loading: Loading,
-        })
-      },
-      {
-        path: '/timeManage.html',
-        component: Loadable({
-          loader: () => import('./routes/TimeManage'),
-          loading: Loading,
-        })
-      },
-      {
-        path: '/thingsDid.html',
-        component: Loadable({
-          loader: () => import('./routes/ThingsDid'),
-          loading: Loading,
-        })
-      },
-      {
-        path: '/lTable.html',
-        // exact: true,
-        component: Loadable({
-          loader: () => import('./routes/LTable/list'),
-          loading: Loading,
-        })
-      },
-      {
-        path: '/importModal.html',
-        // exact: true,
-        component: Loadable({
-          loader: () => import('./routes/ImportFile'),
-          loading: Loading,
-        })
-      },
-      {
-        path: '/multipleAdd/base.html',
-        // exact: true,
-        component: Loadable({
-          loader: () => import('./routes/MultipleAdd/base/index'),
-          loading: Loading,
-        })
-      },
-      {
-        path: '/multipleAdd/complexOne.html',
-        // exact: true,
-        component: Loadable({
-          loader: () => import('./routes/MultipleAdd/complexOne/index'),
-          loading: Loading,
-        })
-      },
-      {
-        path: '/uploadMultiple.html',
-        // exact: true,
-        component: Loadable({
-          loader: () => import('./routes/UploadMultiple'),
-          loading: Loading,
-        })
-      },
-      {
-        path: '/chart/tabsBase.html',
-        // exact: true,
-        component: Loadable({
-          loader: () => import('./routes/Chart/tabsBase'),
-          loading: Loading,
-        })
-      },
-      {
-        path: '/tree/one.html',
-        // exact: true,
-        component: Loadable({
-          loader: () => import('./routes/Tree/one'),
-          loading: Loading,
-        })
-      },
-      {
-        path: '/modal/one.html',
-        // exact: true,
-        component: Loadable({
-          loader: () => import('./routes/Modal/one'),
+          loader: () => import('./routes'),
           loading: Loading,
         })
       },
