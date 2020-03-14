@@ -1,47 +1,41 @@
 import React from 'react';
 import { renderRoutes } from 'react-router-config'
-import Bundle from '../core/bundle'
+import Loadable from 'react-loadable';
 import ScrollToTop from '../components/ScrollToTop'
-import MainLayout from '../components/MainLayout/MainLayout'
-//经过bundle-loader包装过的组件，实现按需加载
-const createChildRouteComponent = (container, props, ) => (
-  <Bundle load={container}>
-    {(View) => <View {...props} />}
-  </Bundle>
-)
+import { Spin } from 'antd';
 const Root = ({ route }) => (
   <ScrollToTop>
-    <MainLayout>
       {renderRoutes(route.routes)}
-    </MainLayout>
   </ScrollToTop>
 )
-function RouterConfig() {
+const Loading = ({ error, pastDelay }) => {
+  if (error) {
+    console.log(error);
+    return <div>Error!</div>;
+  } else if (pastDelay) {
+    return (
+      <Spin tip="Loading...">
+        <div style={{ height: 500 }} />
+      </Spin>
+    );
+  } else {
+    return null;
+  }
+};
+function RootRouter() {
   const routes = [
     {
       component: Root,
       routes: [{
-        path: '/note.html',
-        exact: true,
-        component: (props) => {
-          return createChildRouteComponent(require('./routes/Note'), props)
-        }
-      }, {
-        path: '/understanding.html',
-        exact: true,
-        component: (props) => {
-          return createChildRouteComponent(require('./routes/Understanding'), props)
-        }
-      }, {
-        path: '/videoDemo',
-        exact: true,
-        component: (props) => {
-          return createChildRouteComponent(require('./routes/videoDemo'), props)
-        }
-      },]
+        path: '/index.html',
+        component: Loadable({
+          loader: () => import('./routes'),
+          loading: Loading,
+        })
+      },
+      ]
     }
   ]
   return <div>{renderRoutes(routes)}</div>
 }
-
-export default RouterConfig;
+export default RootRouter;

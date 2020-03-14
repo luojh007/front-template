@@ -5,25 +5,29 @@ const webpackConfig = require('./webpack.dev.conf')
 const compiler = webpack(webpackConfig);
 const express = require('express');
 const app = express();
-
+const config = require('../config/index')
+const port = config.dev.port
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
-  quiet: true,
   publicPath: webpackConfig.output.publicPath,
+  quiet: true,
+  // stats: "none"
 })
 
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {
-  log: false
+  log: false,
+  hot: true,
+
 })
 
 app.use(history({
   rewrites: [
-    { from: /\w+\.html/, to: '/'},
+    { from: /\w+\.html/, to: '/' },
   ]
 }));
 app.use(devMiddleware)
 
 app.use(hotMiddleware)
 
-app.listen(3000, () => {
-  console.log("成功启动：localhost:" + '3000')
+app.listen(port, () => {
+  console.log("成功启动：localhost:" + port)
 })
