@@ -9,19 +9,22 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const TerserJSPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 function resolve(dir) {
   return path.join(__dirname, "..", dir);
 }
 module.exports = merge(baseWebpack, {
   mode: 'production',
-  entry: path.resolve(__dirname, '../src/index.js'), //指定入口文件，程序从这里开始编译,__dirname当前所在目录, ../表示上一级目录, ./同级目录
+  entry: path.resolve('src/index.js'), //指定入口文件，程序从这里开始编译,__dirname当前所在目录, ../表示上一级目录, ./同级目录
   output: {
     path: config.build.assetsRoot,
     filename: 'js/[name].js',
     chunkFilename: 'js/[name]/[chunkhash].js' // [name] bundle-loader 的name配置值
   },
-   //压缩js,css
-   optimization: {   
+  devtool: config.build.productionSourceMap ? "#source-map" : false,
+  //压缩js,css
+  optimization: {
     minimizer: [
       new TerserJSPlugin({
         terserOptions: {
@@ -130,7 +133,7 @@ module.exports = merge(baseWebpack, {
     new MiniCssExtractPlugin({
       filename: "./css/[name].css",
       chunkFilename: "./css/[name].css"
-    }),
+    }),   
   ],
 }
 )

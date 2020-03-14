@@ -5,7 +5,10 @@ function resolve(dir) {
 }
 module.exports = {
   entry: {
-    app: resolve("src/index.js"),
+    app: resolve("src/spa/bootstrap.js"),
+    // app: resolve("src/index.js")
+    // 'single-spa.config': './sap.config.js',
+
   },
   output: {
     filename: '[name].js',
@@ -15,6 +18,9 @@ module.exports = {
     //   : config.dev.assetsPublicPath
     publicPath: '/'
   },
+  node: {
+		fs: 'empty'
+	},
   module: {
     rules: [
       {

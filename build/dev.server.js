@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 var history = require('connect-history-api-fallback');
-
+var path = require("path");
 const webpackConfig = require('./webpack.dev.conf')
 const compiler = webpack(webpackConfig);
 const express = require('express');
@@ -18,6 +18,7 @@ var hotMiddleware = require('webpack-hot-middleware')(compiler, {
   hot: true,
 
 })
+app.use( express.static("./static"));
 
 app.use(history({
   rewrites: [
