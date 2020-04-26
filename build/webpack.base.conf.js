@@ -5,8 +5,8 @@ function resolve(dir) {
 }
 module.exports = {
   entry: {
-    app: resolve("src/spa/bootstrap.js"),
-    // app: resolve("src/index.js")
+    // app: resolve("src/spa/bootstrap.js"),
+    app: resolve("src/index.js")
     // 'single-spa.config': './sap.config.js',
 
   },

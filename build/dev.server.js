@@ -12,13 +12,13 @@ var devMiddleware = require('webpack-dev-middleware')(compiler, {
   quiet: true,
   // stats: "none"
 })
-
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {
   log: false,
   hot: true,
 
 })
-app.use( express.static("./static"));
+
+app.use(express.static("./static"));
 
 app.use(history({
   rewrites: [

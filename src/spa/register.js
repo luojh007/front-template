@@ -39,6 +39,7 @@ export function pathPrefix(app) {
     else if (location.pathname.indexOf(`${app.path || app.url}`) === 0) {
       isShow = true
     }
+    console.log(isShow)
     return isShow;
   }
 }
@@ -51,6 +52,6 @@ export async function registerApp(params) {
   registerApplication(
     params.name,
     () => SystemJS.import(params.main),
-    params.base ? true : () => pathPrefix(params)
+    params.base ? true : pathPrefix(params)
   )
 }
