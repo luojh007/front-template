@@ -8,11 +8,11 @@ export default class App extends Component {
     super(props);
   }
   componentDidMount(){
+    //这里可以逻辑判断，是否引入引导程序
     bootstrap()
-
   }
 
-  
+
   render() {
     const supportsHistory = 'pushState' in window.history;
     return (
