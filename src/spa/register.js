@@ -2,6 +2,9 @@ import './libs/system.js'
 import './libs/es6-promise.auto.min.js'
 
 import { registerApplication, start, } from 'single-spa'
+//全局的事件派发器 (新增)
+import { GlobalEventDistributor } from './libs/GlobalEventDistributor'
+const globalEventDistributor = new GlobalEventDistributor();
 
 // hash 模式,项目路由用的是hash模式会用到该函数
 export function hashPrefix(app) {
@@ -49,9 +52,32 @@ function isArray(o) {
 }
 
 export async function registerApp(params) {
+  //导入派发器
+  let storeModule = {}, customProps = { globalEventDistributor: globalEventDistributor };
+
+  try {
+    storeModule = params.store ? await SystemJS.import(params.store) : { default: null }
+  } catch (error) {
+    console.log(`无法加载${params.name}的store数据`)
+    return;
+  }
+
+  if(storeModule.default && globalEventDistributor){
+    //注册到全局
+    globalEventDistributor.registerStore(storeModule.default)
+    
+    customProps.store = storeModule.default;
+  }
+
+  customProps = {
+    store: storeModule,
+    globalEventDistributor: globalEventDistributor
+  };
+  console.log(customProps);
   registerApplication(
     params.name,
     () => SystemJS.import(params.main),
-    params.base ? true : pathPrefix(params)
+    params.base ? true : pathPrefix(params),
+    customProps
   )
 }
