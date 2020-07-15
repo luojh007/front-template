@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+// import {SearchBar} from 'biosan'
 export default class index extends Component {
   render() {
     return (

@@ -5,7 +5,7 @@ import ScrollToTop from '../components/ScrollToTop'
 import { Spin } from 'antd';
 const Root = ({ route }) => (
   <ScrollToTop>
-      {renderRoutes(route.routes)}
+    {renderRoutes(route.routes)}
   </ScrollToTop>
 )
 const Loading = ({ error, pastDelay }) => {
