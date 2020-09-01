@@ -114,6 +114,13 @@ function RootRouter() {
           loading: Loading,
         })
       },
+      {
+        path: '/fatherSub.html',
+        component: Loadable({
+          loader: () => import('./routes/fatherSub'),
+          loading: Loading,
+        })
+      },
       ]
     }
   ]

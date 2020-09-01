@@ -13,7 +13,7 @@ module.exports = {
   },
   dev: {
     env: 'dev',
-    port: 8081,
+    port: 8083,
     autoOpenBrowser: false,
     assetsSubDirectory: '/static/',
     assetsPublicPath: '/',
