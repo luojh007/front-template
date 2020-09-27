@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { SearchBar } from 'biosan'
-import 'biosan/dist/css/main.css'
-import { Button } from 'antd'
+import {MySearchBar} from 'biosan-front-ui'
 const dataScore = [
   {
     type: 'input',
@@ -27,6 +25,7 @@ const dataScore = [
     type: 'datePicker',
     label: '出生日期',
     key: 'datePicker_birthday',
+    keys: ['birthday']
   },
   {
     type: 'cascader',
@@ -80,9 +79,11 @@ export default class index extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      expand: false
+      expand: false,
+       visible: false, confirmLoading: false 
     }
   }
+ 
   onSearch = (value) => {
     console.log(value)
   }
@@ -94,11 +95,12 @@ export default class index extends Component {
     return (
 
       <div>
-        <Button>aaaa</Button>
+        {/* <Button>aaaa</Button> */}
         前端自动化构建    
-        <SearchBar
-          value={value}
-          dataScore={dataScore}
+        <MySearchBar
+          wrappedComponentRef={searchFrom => this.searchFrom = searchFrom }
+          searchInfo={value}
+          itemList={dataScore}
           expand={this.state.expand}
           onSearch={this.onSearch}
           onExpand={this.onExpand}

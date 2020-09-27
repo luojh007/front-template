@@ -4,7 +4,7 @@ module.exports = {
     env: 'prod',
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist/static/'),
-    assetsSubDirectory: 'assets',// static
+    assetsSubDirectory: 'assets', // static
     assetsPublicPath: '/static/', // /static/
     productionSourceMap: false,
     productionGzip: false,
@@ -19,5 +19,5 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {},
     cssSourceMap: false
-  },
-}
+  }
+};

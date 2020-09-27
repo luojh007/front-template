@@ -23,7 +23,7 @@ module.exports = {
         query: {
           presets: ["@babel/preset-react"]
         },
-        include: [resolve("src")]
+        include: [resolve("src"),resolve('')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

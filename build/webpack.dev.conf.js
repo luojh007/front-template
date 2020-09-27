@@ -13,6 +13,11 @@ Object.keys(baseWebpack.entry).forEach(function (name) {
     baseWebpack.entry[name]
   );
 });
+const moduleCss = [
+  resolve("src/components"),
+  resolve("src/view/"),
+  resolve("node_modules/biosan-front-ui")
+]
 module.exports = merge(baseWebpack, {
   mode: 'development',
   devtool: '#cheap-module-eval-source-map',
@@ -20,10 +25,7 @@ module.exports = merge(baseWebpack, {
     rules: [
       {
         test: /(\.css|\.less)/,
-        include: [
-          resolve("src/components"),
-          resolve("src/view/"),
-        ],
+        include: moduleCss,
         use: [
           { loader: "style-loader" },
           {
@@ -44,10 +46,7 @@ module.exports = merge(baseWebpack, {
       },
       {
         test: /(\.css|\.less)$/,
-        exclude: [
-          resolve("src/components"),
-          resolve("src/view/"),
-        ],
+        exclude: moduleCss,
         use: [
           { loader: "style-loader" },
           {
