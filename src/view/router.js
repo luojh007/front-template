@@ -133,6 +133,13 @@ function RootRouter() {
             loader: () => import('./routes/Print'),
             loading: Loading
           })
+        },
+        {
+          path: '/lifeCycle.html',
+          component: Loadable({
+            loader: () => import('./routes/LifeCycle'),
+            loading: Loading
+          })
         }
       ]
     }
