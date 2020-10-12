@@ -140,6 +140,13 @@ function RootRouter() {
             loader: () => import('./routes/LifeCycle'),
             loading: Loading
           })
+        },
+        {
+          path: '/table.html',
+          component: Loadable({
+            loader: () => import('./routes/Table'),
+            loading: Loading
+          })
         }
       ]
     }
