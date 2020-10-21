@@ -144,7 +144,7 @@ function RootRouter() {
         {
           path: '/table.html',
           component: Loadable({
-            loader: () => import('./routes/Table'),
+            loader: () => import('./routes/OptimizeTable'),
             loading: Loading
           })
         }
