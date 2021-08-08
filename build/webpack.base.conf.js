@@ -22,10 +22,10 @@ module.exports = {
         use: [{
           loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-react']
-          }
+            presets: ['@babel/preset-react'],
+          },
         }],
-        include: [resolve("src")]
+        include: [resolve("src"), resolve('node_modules/biosan-front')]
       },
     ]
   },

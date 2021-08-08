@@ -14,18 +14,11 @@ module.exports = merge(baseWebpack, {
   },
   //压缩js,css
   optimization: {
-    minimizer: [
-      new TerserJSPlugin({
-        terserOptions: {
-          compress: {
-            drop_console: true
-          }
-        }
-      }),
-    ],
-    splitChunks: {
-      chunks: 'all',
-    },
+    minimize: false,
+    concatenateModules: false,
+    runtimeChunk: {
+      name: 'ljh'
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
